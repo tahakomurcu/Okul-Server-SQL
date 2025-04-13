@@ -1,0 +1,645 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Student</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand">Student</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <button class="nav-link active" id="GetList">Get List</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link active" id="GetStudent">Get Student</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link active" id="AddStudent">Add Student</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link active" id="ChangeStudent">Change Student</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link active" id="DeleteStudent">Delete Student</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" id="GetListDiv" hidden>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Number</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Class</th>
+                    <th scope="col">Grade</th>
+                </tr>
+            </thead>
+            <tbody id="StudentsList">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container" id="GetStudentDiv" hidden>
+        <form id="GetStudentForm">
+            <div class="mb-3">
+                <label for="FindStudentGet" class="form-label">Number : </label>
+                <input type="number" class="form-control" id="FindStudentGet" name="Number" placeholder="Number">
+            </div>
+            <p id="getMessage" style="color: red;"></p>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <table class="table" id="studentTable" hidden>
+            <thead>
+                <tr>
+                    <th scope="col">Number</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Class</th>
+                    <th scope="col">Grade</th>
+                </tr>
+            </thead>
+            <tbody id="Student">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container" id="AddStudentDiv" hidden>
+        <form id="addStudentForm">
+            <div class="mb-3">
+                <label for="AddNumber" class="form-label">Number : </label>
+                <input type="number" class="form-control" id="AddNumber" name="Number" placeholder="Number" required>
+            </div>
+            <div class="mb-3">
+                <label for="AddName" class="form-label">Name : </label>
+                <input type="text" class="form-control" id="AddName" name="Name" placeholder="Name" required>
+            </div>
+            <div class="mb-3">
+                <label for="AddSurname" class="form-label">Surname : </label>
+                <input type="text" class="form-control" id="AddSurname" name="Surname" placeholder="Surname" required>
+            </div>
+            <div class="mb-3">
+                <label for="AddClass" class="form-label">Class : </label>
+                <input type="text" class="form-control" id="AddClass" name="Class" placeholder="Class" required>
+            </div>
+            <div class="mb-3">
+                <label for="AddGrade" class="form-label">Grade : </label>
+                <input type="number" class="form-control" id="AddGrade" name="Grade" placeholder="Grade" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <p id="addMessage" style="color: green;" hidden>Öğrenci başarıyla eklendi.</p>
+    </div>
+
+    <div class="container" id="ChangeStudentDiv" hidden>
+        <form id="changeStudentInput">
+            <div class="mb-3">
+                <label for="FindStudentChange" class="form-label">Number : </label>
+                <input type="number" class="form-control" id="FindStudentChange" name="Number" placeholder="Number">
+            </div>
+            <p id="putMessage" style="color: red;"></p>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <h2 id="changeStudentTableBeforeH" style="color:grey;" hidden>Güncellenecek öğrencinin bilgileri</h2>
+        <table class="table" id="changeStudentTableBefore" hidden>
+            <thead>
+                <tr>
+                    <th scope="col">Number</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Class</th>
+                    <th scope="col">Grade</th>
+                </tr>
+            </thead>
+            <tbody id="changeStudentBefore">
+            </tbody>
+        </table>
+        <h3 id="changeStudentFormH" style="color:grey;" hidden>Güncellemek için asağıyı doldurunuz.</h3>
+        <form id="changeStudentForm" hidden>
+            <div class="mb-3">
+                <label for="ChangeNumber" class="form-label">Number : </label>
+                <input type="number" class="form-control" id="ChangeNumber" name="Number" placeholder="Number" required>
+            </div>
+            <div class="mb-3">
+                <label for="ChangeName" class="form-label">Name : </label>
+                <input type="text" class="form-control" id="ChangeName" name="Name" placeholder="Name" required>
+            </div>
+            <div class="mb-3">
+                <label for="ChangeSurname" class="form-label">Surname : </label>
+                <input type="text" class="form-control" id="ChangeSurname" name="Surname" placeholder="Surname" required>
+            </div>
+            <div class="mb-3">
+                <label for="ChangeClass" class="form-label">Class : </label>
+                <input type="text" class="form-control" id="ChangeClass" name="Class" placeholder="Class" required>
+            </div>
+            <div class="mb-3">
+                <label for="ChangeGrade" class="form-label">Grade : </label>
+                <input type="number" class="form-control" id="ChangeGrade" name="Grade" placeholder="Grade" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <p id="putMessageAfter" style="color: green;" hidden>Öğrenci başarıyla güncellendi.</p>
+    </div>
+
+    <div class="container" id="DeleteStudentDiv" hidden>
+        <form id="DeleteStudentForm">
+            <div class="mb-3">
+                <label for="FindStudentDelete" class="form-label">Number : </label>
+                <input type="number" class="form-control" id="FindStudentDelete" name="Number" placeholder="Number">
+            </div>
+            <p id="deleteMessage"></p>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <h2 id="deleteStudentTableBeforeH" style="color:grey;" hidden>Silinecek öğrencinin bilgileri</h2>
+        <table class="table" id="deleteStudentTableBefore" hidden>
+            <thead>
+                <tr>
+                    <th scope="col">Number</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Class</th>
+                    <th scope="col">Grade</th>
+                </tr>
+            </thead>
+            <tbody id="deleteStudentBefore">
+            </tbody>
+        </table>
+        <button id="yes" type="button" class="btn btn-danger" hidden>Evet</button>
+        <button id="no" type="button" class="btn btn-primary" hidden>Hayır</button>
+    </div>
+
+    <script>
+        const item1 = document.getElementById("GetList");
+        const item2 = document.getElementById("GetStudent");
+        const item3 = document.getElementById("AddStudent");
+        const item4 = document.getElementById("ChangeStudent");
+        const item5 = document.getElementById("DeleteStudent");
+
+        const div1 = document.getElementById("GetListDiv");
+        const div2 = document.getElementById("GetStudentDiv");
+        const div3 = document.getElementById("AddStudentDiv");
+        const div4 = document.getElementById("ChangeStudentDiv");
+        const div5 = document.getElementById("DeleteStudentDiv");
+
+        function showSection(section) {
+            div1.hidden = true;
+            div2.hidden = true;
+            div3.hidden = true;
+            div4.hidden = true;
+            div5.hidden = true;
+            section.hidden = false;
+        }
+
+
+        item1.addEventListener("click", function () {
+            showSection(div1);
+
+            fetch("https://localhost:7039/api/Students")
+                .then(response => response.json())
+                .then(data => {
+                    let tableBody = document.getElementById("StudentsList");
+                    tableBody.innerHTML = "";
+
+                    data.sort((a, b) => a.number - b.number);
+
+
+                    data.forEach(student => {
+                        let row = `<tr>
+                                                                <td>${student.number}</td>
+                                                                <td>${student.name}</td>
+                                                                <td>${student.surname}</td>
+                                                                <td>${student.class}</td>
+                                                                <td>${student.grade}</td>
+                                                            </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error("Hata:", error));
+        });
+
+
+        item2.addEventListener("click", function () {
+            showSection(div2);
+        });
+
+        document.getElementById("GetStudentForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let studentNumber = document.getElementById("FindStudentGet").value.trim();
+            let messageElement = document.getElementById("getMessage");
+            let studentTable = document.getElementById("studentTable");
+            let tableBody = document.getElementById("Student");
+
+            messageElement.textContent = "";
+            studentTable.hidden = true;
+            tableBody.innerHTML = "";
+
+            if (!studentNumber) {
+                messageElement.textContent = "Lütfen bir öğrenci numarası girin!";
+                messageElement.style.color = "red";
+                return;
+            }
+
+            fetch(`https://localhost:7039/api/Students/${studentNumber}`)
+                .then(response => {
+                    if (response.status === 404) throw new Error("Böyle bir öğrenci bulunamadı!");
+                    return response.json();
+                })
+                .then(student => {
+                    studentTable.hidden = false;
+                    let row = `<tr>
+                                                            <td>${student.number}</td>
+                                                            <td>${student.name}</td>
+                                                            <td>${student.surname}</td>
+                                                            <td>${student.class}</td>
+                                                            <td>${student.grade}</td>
+                                                        </tr>`;
+                    tableBody.innerHTML = row;
+                })
+                .catch(error => {
+                    messageElement.textContent = error.message;
+                    messageElement.style.color = "red";
+                });
+        });
+
+
+        item3.addEventListener("click", () => {
+            applyValidationAttributes("addStudentForm");
+            showSection(div3);
+        });
+
+        document.getElementById("addStudentForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const form = document.getElementById("addStudentForm"); // ❗ Eksik olan satır
+
+            if (!form.checkValidity()) {
+                form.reportValidity(); // 📌 Chrome kutucuğu burada çıkar
+                return;
+            }
+
+            const number = Number(document.getElementById("AddNumber").value);
+            const name = formatName(document.getElementById("AddName").value);
+            const surname = formatName(document.getElementById("AddSurname").value);
+            const studentClass = formatClass(document.getElementById("AddClass").value);
+            const grade = Number(document.getElementById("AddGrade").value);
+
+            const student = {
+                Number: number,
+                Name: name,
+                Surname: surname,
+                Class: studentClass,
+                Grade: grade
+            };
+
+            const messageElement = document.getElementById("addMessage");
+            const originalMessage = "Öğrenci başarıyla eklendi.";
+            const originalColor = "green";
+
+            fetch("https://localhost:7039/api/Students", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(student)
+            })
+                .then(function (response) {
+                    if (!response.ok) {
+                        // ❗ Hata fırlatma yok, doğrudan <p> içine yaz
+                        messageElement.textContent = `${student.Number} numaralı öğrenci zaten var! Başka bir öğrenci numarası giriniz.`;
+                        messageElement.style.color = "red";
+                        messageElement.hidden = false;
+
+                        setTimeout(() => {
+                            messageElement.textContent = originalMessage;
+                            messageElement.style.color = originalColor;
+                            messageElement.hidden = true;
+                        }, 5000);
+                        return;
+                    }
+
+                    return response.json().then(function () {
+                        messageElement.textContent = originalMessage;
+                        messageElement.style.color = originalColor;
+                        messageElement.hidden = false;
+
+                        setTimeout(() => {
+                            messageElement.hidden = true;
+                            document.getElementById("addStudentForm").reset();
+                            document.getElementById("AddStudentDiv").hidden = false;
+                        }, 2000);
+                    });
+                })
+                .catch(function (error) {
+                    console.error("Beklenmedik hata:", error);
+                });
+        });
+
+
+
+
+        //-----------------------------------------------------
+        item4.addEventListener("click", () => {
+            applyValidationAttributes("changeStudentForm");
+            showSection(div4);
+        });
+
+        // 🔹 Öğrenci bilgilerini getiren form
+        document.getElementById("changeStudentInput").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const studentNumber = document.getElementById("FindStudentChange").value.trim();
+            const messageElement = document.getElementById("putMessage");
+            const studenTableH = document.getElementById("changeStudentTableBeforeH");
+            const studentTable = document.getElementById("changeStudentTableBefore");
+            const tableBody = document.getElementById("changeStudentBefore");
+
+            messageElement.textContent = "";
+            studenTableH.hidden = true;
+            studentTable.hidden = true;
+            tableBody.innerHTML = "";
+
+            if (!studentNumber) {
+                messageElement.textContent = "Lütfen bir öğrenci numarası girin!";
+                messageElement.style.color = "red";
+                return;
+            }
+
+            fetch(`https://localhost:7039/api/Students/${studentNumber}`)
+                .then(response => {
+                    if (response.status === 404) {
+                        document.getElementById("changeStudentFormH").hidden = true;
+                        document.getElementById("changeStudentForm").hidden = true;
+                        document.getElementById("putMessageAfter").hidden = true;
+                        throw new Error("Böyle bir öğrenci bulunamadı!");
+                    }
+                    return response.json();
+                })
+                .then(student => {
+                    studenTableH.hidden = false;
+                    studentTable.hidden = false;
+                    let row = `
+                <tr>
+                    <td>${student.number}</td>
+                    <td>${student.name}</td>
+                    <td>${student.surname}</td>
+                    <td>${student.class}</td>
+                    <td>${student.grade}</td>
+                </tr>`;
+                    tableBody.innerHTML = row;
+
+                    document.getElementById("changeStudentFormH").hidden = false;
+                    document.getElementById("changeStudentForm").hidden = false;
+                })
+                .catch(error => {
+                    messageElement.textContent = error.message;
+                    messageElement.style.color = "red";
+                });
+        });
+
+        // 🔹 Öğrenciyi güncelleyen form
+        document.getElementById("changeStudentForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const form = document.getElementById("changeStudentForm");
+
+            if (!form.checkValidity()) {
+                form.reportValidity(); // 📌 Chrome kutucuğu burada çıkar
+                return;
+            }
+
+            const studentNumber = document.getElementById("FindStudentChange").value.trim();
+            const messageElement = document.getElementById("putMessage");
+            const successMessage = document.getElementById("putMessageAfter");
+
+            // Mesaj kutularını sıfırla
+            messageElement.textContent = "";
+            successMessage.textContent = "";
+            successMessage.hidden = true;
+
+            const number = Number(document.getElementById("ChangeNumber").value);
+            const name = formatName(document.getElementById("ChangeName").value);
+            const surname = formatName(document.getElementById("ChangeSurname").value);
+            const studentClass = formatClass(document.getElementById("ChangeClass").value);
+            const grade = Number(document.getElementById("ChangeGrade").value);
+
+            const updatedStudent = {
+                Number: number,
+                Name: name,
+                Surname: surname,
+                Class: studentClass,
+                Grade: grade
+            };
+
+            fetch(`https://localhost:7039/api/Students/${studentNumber}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updatedStudent)
+            })
+                .then(function (response) {
+                    return response.text().then(function (message) {
+                        if (!response.ok) {
+                            // Sunucudan gelen hata mesajını göster
+                            messageElement.textContent = message;
+                            messageElement.style.color = "red";
+                            return; // ✅ Devam etmesin
+                        }
+
+                        // Başarılı durum
+                        successMessage.hidden = false;
+                        successMessage.style.color = "green";
+                        successMessage.textContent = message;
+
+                        setTimeout(() => {
+                            successMessage.hidden = true;
+                            successMessage.textContent = "";
+
+                            // Formları sıfırla
+                            document.getElementById("changeStudentForm").reset();
+                            document.getElementById("changeStudentInput").reset();
+
+                            // Tabloları ve formları gizle
+                            document.getElementById("changeStudentForm").hidden = true;
+                            document.getElementById("changeStudentFormH").hidden = true;
+                            document.getElementById("changeStudentTableBeforeH").hidden = true;
+                            document.getElementById("changeStudentTableBefore").hidden = true;
+                            document.getElementById("changeStudentBefore").innerHTML = "";
+                        }, 1500);
+                    });
+                })
+                .catch(error => {
+                    messageElement.textContent = "Beklenmedik bir hata oluştu!";
+                    messageElement.style.color = "red";
+                    console.error("Hata:", error);
+                });
+        });
+
+
+
+
+
+        item5.addEventListener("click", () => showSection(div5));
+
+        document.getElementById("DeleteStudentForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let studentNumber = document.getElementById("FindStudentDelete").value.trim();
+            let messageElement = document.getElementById("deleteMessage");
+            messageElement.textContent = "";
+
+            const tableHDelete = document.getElementById("deleteStudentTableBeforeH");
+            const tableDelete = document.getElementById("deleteStudentTableBefore");
+            const tableNewDelete = document.getElementById("deleteStudentBefore");
+            const buttonYesDelete = document.getElementById("yes");
+            const buttonNoDelete = document.getElementById("no");
+
+            if (!studentNumber) {
+                messageElement.textContent = "Lütfen bir öğrenci numarası girin!";
+                messageElement.style.color = "red";
+                return;
+            }
+
+            fetch(`https://localhost:7039/api/Students/${studentNumber}`)
+                .then(response => {
+                    if (response.status === 404) {
+                        tableHDelete.hidden = true;
+                        tableDelete.hidden = true;
+                        buttonYesDelete.hidden = true;
+                        buttonNoDelete.hidden = true;
+                        messageElement.textContent = "Böyle bir öğrenci bulunamadı!";
+                        messageElement.style.color = "red";
+                        throw new Error("Böyle bir öğrenci bulunamadı!");
+                    }
+                    return response.json();
+                })
+                .then(student => {
+                    tableHDelete.hidden = false;
+                    tableDelete.hidden = false;
+                    let row = `<tr>
+                            <td>${student.number}</td>
+                            <td>${student.name}</td>
+                            <td>${student.surname}</td>
+                            <td>${student.class}</td>
+                            <td>${student.grade}</td>
+                       </tr>`;
+                    tableNewDelete.innerHTML = row;
+                    buttonYesDelete.hidden = false;
+                    buttonNoDelete.hidden = false;
+
+                    buttonYesDelete.onclick = function () {
+                        fetch(`https://localhost:7039/api/Students/delete/${student.number}`, {
+                            method: "DELETE"
+                        })
+                            .then(response => {
+                                if (response.status === 404) {
+                                    throw new Error("Böyle bir öğrenci bulunamadı!");
+                                }
+                                return response.text();
+                            })
+                            .then(msg => {
+                                messageElement.textContent = "Öğrenci başarıyla silindi.";
+                                messageElement.style.color = "green";
+
+                                setTimeout(() => {
+                                    document.getElementById("DeleteStudentForm").reset();
+                                    tableHDelete.hidden = true;
+                                    tableDelete.hidden = true;
+                                    tableNewDelete.innerHTML = "";
+                                    buttonYesDelete.hidden = true;
+                                    buttonNoDelete.hidden = true;
+                                    messageElement.textContent = "";
+                                }, 2000);
+                            })
+                            .catch(error => {
+                                messageElement.textContent = error.message;
+                                messageElement.style.color = "red";
+                            });
+                    };
+
+                    buttonNoDelete.onclick = function () {
+                        setTimeout(() => {
+                        document.getElementById("DeleteStudentForm").reset();
+                        tableHDelete.hidden = true;
+                        tableDelete.hidden = true;
+                        tableNewDelete.innerHTML = "";
+                        buttonYesDelete.hidden = true;
+                        buttonNoDelete.hidden = true;
+                        messageElement.textContent = "";
+                        }, 1000);
+                    };
+                })
+                .catch(error => {
+                    messageElement.textContent = error.message;
+                    messageElement.style.color = "red";
+                });
+        });
+
+        function formatName(text) {
+            return text
+                .trim()
+                .split(" ")
+                .filter(word => word.length > 0) // boşlukları sil
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(" ");
+        }
+
+        function formatClass(text) {
+            return text.trim().toUpperCase();
+        }
+
+        function applyValidationAttributes(formId) {
+            const form = document.getElementById(formId);
+
+            // ✅ Number
+            const numberInput = form.querySelector('[name="Number"]');
+            numberInput.setAttribute("required", "");
+            numberInput.setAttribute("min", "0");
+            numberInput.setAttribute("max", "5000");
+
+            // ✅ Name
+            const nameInput = form.querySelector('[name="Name"]');
+            nameInput.setAttribute("required", "");
+            nameInput.setAttribute("minlength", "3");
+            nameInput.setAttribute("maxlength", "50");
+
+            // ✅ Surname
+            const surnameInput = form.querySelector('[name="Surname"]');
+            surnameInput.setAttribute("required", "");
+            surnameInput.setAttribute("minlength", "3");
+            surnameInput.setAttribute("maxlength", "50");
+
+            // ✅ Class
+            const classInput = form.querySelector('[name="Class"]');
+            classInput.setAttribute("required", "");
+            classInput.setAttribute("maxlength", "1");
+            classInput.setAttribute("pattern", ".{1}"); // sadece 1 karakter olmalı
+
+            // ✅ Grade
+            const gradeInput = form.querySelector('[name="Grade"]');
+            gradeInput.setAttribute("required", "");
+            gradeInput.setAttribute("min", "0");
+            gradeInput.setAttribute("max", "100");
+        }
+
+
+
+    </script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>
